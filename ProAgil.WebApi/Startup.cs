@@ -37,6 +37,8 @@ namespace ProAgil.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProAgil.WebApi", Version = "v1" });
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +51,8 @@ namespace ProAgil.WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProAgil.WebApi v1"));
             }
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -59,6 +63,8 @@ namespace ProAgil.WebApi
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }
